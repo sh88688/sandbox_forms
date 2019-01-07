@@ -1,6 +1,26 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Radio from "@material-ui/core/Radio";
+import MenuItem from "@material-ui/core/MenuItem";
+const currencies = [
+  {
+    value: "USD",
+    label: "$"
+  },
+  {
+    value: "EUR",
+    label: "€"
+  },
+  {
+    value: "BTC",
+    label: "฿"
+  },
+  {
+    value: "JPY",
+    label: "¥"
+  }
+];
+
 class InputBuilder extends Component {
   constructor(props) {
     super(props);
@@ -49,6 +69,25 @@ class InputBuilder extends Component {
             variant={variant}
             margin="normal"
           />
+        );
+        break;
+      case "textfield-select":
+        Element = (
+          <TextField
+            id="outlined-select-currency"
+            select
+            label="Select"
+            onChange={this.changeValue}
+            helperText="Please select your currency"
+            margin="normal"
+            variant="outlined"
+          >
+            {currencies.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         );
         break;
     }

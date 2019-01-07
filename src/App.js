@@ -17,8 +17,17 @@ const data = [
     variant: "outlined"
   },
   {
-    elementType: "textfield",
+    elementType: "textfield-select",
     type: "text",
+    name: "First Name",
+    classname: "text",
+    placeholder: "Enter first name",
+    inputProps: { defaultValue: "Shivam" },
+    variant: "outlined"
+  },
+  {
+    elementType: "textfield",
+    type: "password",
     name: "Last Name",
     classname: "text",
     placeholder: "Enter first name",
