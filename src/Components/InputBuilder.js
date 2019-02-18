@@ -1,4 +1,5 @@
 import React from "react";
+import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Radio from "@material-ui/core/Radio";
@@ -103,10 +104,9 @@ const InputBuilder = props => {
   }
 
   return (
-    <div>
-      <label>{props.label}</label>
+    <Grid item xs={6}>
       {inputElement}
-    </div>
+    </Grid>
   );
 };
 

@@ -6,6 +6,7 @@ import ErrorBoundary from "./Components/ErrorBoundary";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import checkValidity from "./Components/Validator";
@@ -24,6 +25,7 @@ class FormRender extends Component {
   }
 
   submitHandler = event => {
+    event.preventDefault();
     this.setState({ loading: true });
     const formData = {};
     for (let formElementIdentifier in this.state.iForm) {
@@ -31,8 +33,10 @@ class FormRender extends Component {
         formElementIdentifier
       ].value;
     }
-
-    console.log(formData);
+    setTimeout(() => {
+      console.log(formData);
+      this.setState({ loading: false });
+    }, 2000);
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -68,6 +72,8 @@ class FormRender extends Component {
   render() {
     const formElementsArray = [];
 
+    let Loader = this.state.loading ? <LinearProgress color="primary" /> : null;
+
     for (let key in this.state.iForm) {
       formElementsArray.push({
         id: key,
@@ -76,20 +82,22 @@ class FormRender extends Component {
     }
     let form = (
       <form>
-        {formElementsArray.map(formElement => (
-          <InputBuilder
-            key={formElement.id}
-            touched={formElement.config.touched}
-            errorValue={formElement.config.valid}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            value={formElement.config.value}
-            inputAdornment={formElement.config.inputAdornment}
-            invalid={!formElement.config.valid}
-            shouldValidate={formElement.config.validation}
-            changed={event => this.inputChangedHandler(event, formElement.id)}
-          />
-        ))}
+        <Grid container spacing={24}>
+          {formElementsArray.map(formElement => (
+            <InputBuilder
+              key={formElement.id}
+              touched={formElement.config.touched}
+              errorValue={formElement.config.valid}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              inputAdornment={formElement.config.inputAdornment}
+              invalid={!formElement.config.valid}
+              shouldValidate={formElement.config.validation}
+              changed={event => this.inputChangedHandler(event, formElement.id)}
+            />
+          ))}
+        </Grid>
         <Button
           variant="contained"
           onClick={this.submitHandler}
@@ -102,8 +110,8 @@ class FormRender extends Component {
     );
 
     return (
-      <div style={{ backgroundColor: "lightgrey" }}>
-        <AppBar position="static" style={{ backgroundColor: "#1E88E5" }}>
+      <div style={{ backgroundColor: "#fafafa" }}>
+        <AppBar position="static" style={{ backgroundColor: "#2196f3" }}>
           <Toolbar>
             <Typography variant="h6" fontFamily="Monospace" color="inherit">
               &nbsp; iForms
@@ -111,19 +119,20 @@ class FormRender extends Component {
           </Toolbar>
         </AppBar>
         <br />
+        <Typography
+          fontFamily="Monospace"
+          align="center"
+          variant="h6"
+          color="inherit"
+        >
+          Fill the details :
+        </Typography>
         <br />
         <Grid container spacing={24} justify={"center"}>
           <Grid item xs={6}>
             <Card>
+              {Loader}
               <CardContent>
-                <Typography
-                  fontFamily="Monospace"
-                  align="center"
-                  variant="h6"
-                  color="inherit"
-                >
-                  Fill the details :
-                </Typography>
                 <ErrorBoundary>{form}</ErrorBoundary>
               </CardContent>
             </Card>
