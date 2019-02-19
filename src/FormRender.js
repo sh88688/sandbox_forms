@@ -129,7 +129,7 @@ class FormRender extends Component {
         </Typography>
         <br />
         <Grid container spacing={24} justify={"center"}>
-          <Grid item xs={6}>
+          <Grid item xs={12} lg={6}>
             <Card>
               {Loader}
               <CardContent>

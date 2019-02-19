@@ -104,7 +104,7 @@ const InputBuilder = props => {
   }
 
   return (
-    <Grid item xs={6}>
+    <Grid item xs={12} md={12} lg={6}>
       {inputElement}
     </Grid>
   );
