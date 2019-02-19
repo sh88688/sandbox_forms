@@ -72,7 +72,7 @@ class FormRender extends Component {
   render() {
     const formElementsArray = [];
 
-    let Loader = this.state.loading ? <LinearProgress color="primary" /> : null;
+    let Loader = this.state.loading ? <LinearProgress color="secondary" /> : null;
 
     for (let key in this.state.iForm) {
       formElementsArray.push({
