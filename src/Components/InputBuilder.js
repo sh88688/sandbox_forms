@@ -30,6 +30,7 @@ const InputBuilder = props => {
     case "input":
       inputElement = (
         <TextField
+          fullWidth
           error={props.errorValue === false && props.touched !== false}
           onChange={props.changed}
           {...props.elementConfig}
@@ -53,6 +54,7 @@ const InputBuilder = props => {
       inputElement = (
         <TextField
           select
+          fullWidth
           value={props.value}
           {...props.elementConfig.configs}
           onChange={props.changed}
